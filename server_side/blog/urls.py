@@ -9,5 +9,5 @@ router.register(r'posts', views.BlogPostViewSet)
 router.register(r'users', views.UserViewSet)
 
 urlpatterns = [
-    path(r'api/', include(router.urls)),
+    path(r'', include(router.urls)),
 ]
