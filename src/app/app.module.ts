@@ -14,7 +14,7 @@ import { HomepageComponent } from './homepage/homepage.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatCardModule} from '@angular/material/card';
-
+import {MatButtonModule} from '@angular/material/button';
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,6 +31,7 @@ import {MatCardModule} from '@angular/material/card';
     BrowserAnimationsModule,
     MatButtonToggleModule,
     MatCardModule,
+    MatButtonModule,
   ],
   
   providers: [BlogPostService, UserService,
