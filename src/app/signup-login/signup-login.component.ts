@@ -48,12 +48,6 @@ export class SignupLoginComponent implements OnInit {
       username: this.user.username,
       password: this.user.password,
     });
-    this.userService.getToken.subscribe((data) => {
-      this.usertoken = data;
-      if (data) {
-        this.router.navigate(['home']);
-      }
-    });
   }
 
   refreshToken() {

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class UserService {
@@ -20,7 +21,8 @@ export class UserService {
   public errors: any = [];
   refreshTokenVal: any;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient,
+    private router: Router) {}
 
   // Uses http.post() to get an auth token from djangorestframework-jwt endpoint
   public login(user) {
@@ -28,12 +30,12 @@ export class UserService {
       .post('http://127.0.0.1:8000/api/gettoken/', JSON.stringify(user))
       .subscribe(
         (data) => {
-          this.getToken = new Observable((subscriber) => {
-            subscriber.next(data['access']);
-          });
-          console.log('login success', data);
-          this.refreshTokenVal = data['refresh'];
-          this.updateData(data['access']);
+          if(data['access']) {
+              console.log('login success', data);
+              this.refreshTokenVal = data['refresh'];
+              this.updateData(data['access']);
+              this.router.navigate(['home']);
+          }
         },
         (err) => {
           console.error('login error', err);
