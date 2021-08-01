@@ -8,16 +8,25 @@ import { AppComponent } from './app.component';
 import { BlogPostService } from './services/blog_post.service';
 import { UserService } from './services/user.service';
 import { TokenInterceptor } from './services/http-interceptor.service';
-
+import { NavBarComponent } from './layouts/nav-bar/nav-bar.component';
+import { SignupLoginComponent } from './signup-login/signup-login.component';
+import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
+import { HomepageComponent } from './homepage/homepage.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    NavBarComponent,
+    SignupLoginComponent,
+    PagenotfoundComponent,
+    HomepageComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
   ],
   providers: [BlogPostService, UserService,
     {
