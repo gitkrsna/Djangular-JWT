@@ -4,7 +4,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 @Injectable()
 export class StudentService {
 
-  URL_PATH = `http://krishnapythonwhere.pythonanywhere.com`;
+  URL_PATH = `https://krishnapythonwhere.pythonanywhere.com`;
   constructor(private http: HttpClient) {
   }
 

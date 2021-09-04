@@ -20,7 +20,7 @@ export class UserService {
   // error messages received from the login attempt
   public errors: any = [];
   refreshTokenVal: any;
-  URL_PATH = `http://krishnapythonwhere.pythonanywhere.com`;
+  URL_PATH = `https://krishnapythonwhere.pythonanywhere.com`;
   constructor(private http: HttpClient,
     private router: Router) {}
 

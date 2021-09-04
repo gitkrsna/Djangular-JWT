@@ -8,7 +8,7 @@ export class BlogPostService {
   constructor(private http: HttpClient, private _userService: UserService) {
   }
 
-  URL_PATH = `http://krishnapythonwhere.pythonanywhere.com`
+  URL_PATH = `https://krishnapythonwhere.pythonanywhere.com`
   // Uses http.get() to load data from a single API endpoint
   list() {
     return this.http.get(`${this.URL_PATH}/api/posts`);
