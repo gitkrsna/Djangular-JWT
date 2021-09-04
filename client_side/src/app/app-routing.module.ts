@@ -6,9 +6,11 @@ import { AuthguardService as AuthGuard } from './services/gaurds/authguard.servi
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { LoginGaurdService as LoginGuard } from './services/gaurds/login-gaurd.service';
+import { StudentComponent } from './student/student.component';
 const routes: Routes = [
   { path: '', component: HomepageComponent },
   { path: 'home', component: NavBarComponent, canActivate: [AuthGuard] },
+  { path: 'students', component: StudentComponent, canActivate: [AuthGuard] },
   { path: 'login', component: SignupLoginComponent, canActivate: [LoginGuard] },
 
   // { path: 'second-component', component: SecondComponent },

@@ -9,9 +9,17 @@ class ViewSet(viewsets.ModelViewSet):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
-        headers = self.get_success_headers(serializer.data)
-        return_response = {"success": "true", "status": status.HTTP_200_OK}
-        return Response(return_response, status=status.HTTP_201_CREATED, headers=headers)
+        queryset = self.filter_queryset(self.get_queryset())
+        page = self.paginate_queryset(queryset)
+        if page is not None:
+            serializer = self.get_serializer(page, many=True)
+            return self.get_paginated_response(serializer.data)
+
+        serializer = self.get_serializer(queryset, many=True)
+        return Response(serializer.data)
+        # headers = self.get_success_headers(serializer.data)
+        # return_response = {"success": "true", "status": status.HTTP_200_OK}
+        # return Response(return_response, status=status.HTTP_201_CREATED, headers=headers)
 
     def update(self, request, *args, **kwargs):
         partial = kwargs.pop('partial', False)

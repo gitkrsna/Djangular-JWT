@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-
+import { Router } from '@angular/router';
+import { StudentService } from '../services/student.service';
 @Component({
   selector: 'app-homepage',
   templateUrl: './homepage.component.html',
@@ -7,9 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomepageComponent implements OnInit {
 
-  constructor() { }
+  studentList : any = [];
 
-  ngOnInit(): void {
+  constructor(private studentService: StudentService) {}
+
+  ngOnInit() {
+
   }
-
 }

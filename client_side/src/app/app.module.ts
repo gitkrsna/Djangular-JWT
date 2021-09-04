@@ -71,13 +71,16 @@ import { NavBarComponent } from './layouts/nav-bar/nav-bar.component';
 import { SignupLoginComponent } from './signup-login/signup-login.component';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 import { HomepageComponent } from './homepage/homepage.component';
+import { StudentService } from './services/student.service';
+import { StudentComponent } from './student/student.component';
+
 @NgModule({
   declarations: [
     AppComponent,
     NavBarComponent,
     SignupLoginComponent,
     PagenotfoundComponent,
-    HomepageComponent
+    StudentComponent,
   ],
   imports: [
     BrowserModule,
@@ -136,7 +139,7 @@ import { HomepageComponent } from './homepage/homepage.component';
     ScrollingModule,
   ],
   
-  providers: [BlogPostService, UserService,
+  providers: [BlogPostService, UserService, StudentService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
