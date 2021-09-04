@@ -69,11 +69,12 @@ export class UserService {
     this.token = null;
     this.token_expires = null;
     this.username = null;
+    this.refreshTokenVal = null;
   }
 
   private updateData(token) {
     this.token = token;
-    sessionStorage.setItem('token', this.token);
+    localStorage.setItem('token', this.token);
     this.errors = [];
 
     // decode the token to read the username and expiration timestamp

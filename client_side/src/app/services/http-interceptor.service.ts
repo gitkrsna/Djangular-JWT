@@ -11,7 +11,7 @@ import { Observable } from 'rxjs';
 export class TokenInterceptor implements HttpInterceptor {
   constructor(public auth: UserService) {}
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    let token = sessionStorage.getItem("token");
+    let token = localStorage.getItem("token");
     if (!request.headers.has('Content-Type')) {
       request = request.clone({headers: request.headers.set('Content-Type', 'application/json')});
   }

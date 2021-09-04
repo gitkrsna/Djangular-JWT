@@ -62,7 +62,6 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTreeModule} from '@angular/material/tree';
 import {OverlayModule} from '@angular/cdk/overlay';
-
 // components 
 import { BlogPostService } from './services/blog_post.service';
 import { UserService } from './services/user.service';
@@ -70,9 +69,10 @@ import { TokenInterceptor } from './services/http-interceptor.service';
 import { NavBarComponent } from './layouts/nav-bar/nav-bar.component';
 import { SignupLoginComponent } from './signup-login/signup-login.component';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
-import { HomepageComponent } from './homepage/homepage.component';
 import { StudentService } from './services/student.service';
 import { StudentComponent } from './student/student.component';
+import { FeesComponent } from './fees/fees.component';
+
 
 @NgModule({
   declarations: [
@@ -81,6 +81,7 @@ import { StudentComponent } from './student/student.component';
     SignupLoginComponent,
     PagenotfoundComponent,
     StudentComponent,
+    FeesComponent,
   ],
   imports: [
     BrowserModule,
@@ -138,7 +139,10 @@ import { StudentComponent } from './student/student.component';
     PortalModule,
     ScrollingModule,
   ],
-  
+  exports: [
+    MatTabsModule,
+    MatSidenavModule,
+  ],
   providers: [BlogPostService, UserService, StudentService,
     {
       provide: HTTP_INTERCEPTORS,

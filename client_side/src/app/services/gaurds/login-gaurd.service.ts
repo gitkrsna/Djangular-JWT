@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
 export class LoginGaurdService {
   constructor(public router: Router) {}
   canActivate(): boolean {
-    if (sessionStorage.getItem('token')) {
+    if (localStorage.getItem('token')) {
       this.router.navigate(['']);
       return false;
     }
