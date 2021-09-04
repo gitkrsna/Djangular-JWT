@@ -20,14 +20,14 @@ export class UserService {
   // error messages received from the login attempt
   public errors: any = [];
   refreshTokenVal: any;
-
+  URL_PATH = `http://krishnapythonwhere.pythonanywhere.com`;
   constructor(private http: HttpClient,
     private router: Router) {}
 
   // Uses http.post() to get an auth token from djangorestframework-jwt endpoint
   public login(user) {
     this.http
-      .post('http://127.0.0.1:8000/api/gettoken/', JSON.stringify(user))
+      .post(`${this.URL_PATH}/api/gettoken/`, JSON.stringify(user))
       .subscribe(
         (data) => {
           if(data['access']) {
@@ -50,7 +50,7 @@ export class UserService {
   public refreshToken() {
     this.http
       .post(
-        'http://127.0.0.1:8000/api/refreshtoken/',
+        `${this.URL_PATH}/api/refreshtoken/`,
         JSON.stringify({ refresh: this.refreshTokenVal })
       )
       .subscribe(

@@ -8,14 +8,15 @@ export class BlogPostService {
   constructor(private http: HttpClient, private _userService: UserService) {
   }
 
+  URL_PATH = `http://krishnapythonwhere.pythonanywhere.com`
   // Uses http.get() to load data from a single API endpoint
   list() {
-    return this.http.get('http://127.0.0.1:8000/api/posts');
+    return this.http.get(`${this.URL_PATH}/api/posts`);
   }
-
+//http://krishnapythonwhere.pythonanywhere.com/
   // send a POST request to the API to create a new data object
   create(post, token) {
-    return this.http.post('http://127.0.0.1:8000/api/posts', JSON.stringify(post), this.getHttpOptions());
+    return this.http.post(`${this.URL_PATH}/api/posts`, JSON.stringify(post), this.getHttpOptions());
   }
 
   // helper function to build the HTTP headers
