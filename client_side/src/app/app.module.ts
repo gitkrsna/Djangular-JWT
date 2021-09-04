@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-
 // browser module
 import { BrowserModule } from '@angular/platform-browser';
 

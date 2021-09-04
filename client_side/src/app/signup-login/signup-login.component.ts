@@ -27,12 +27,12 @@ export class SignupLoginComponent implements OnInit {
   }
 
   login() {
-    if (this.email.hasError('email') || this.email.hasError('required')) {
-      return
-    }  
-    if (this.passwordStrength < 40) {
-      return;
-    } 
+    // if (this.email.hasError('email') || this.email.hasError('required')) {
+    //   return
+    // }  
+    // if (this.passwordStrength < 40) {
+    //   return;
+    // } 
     this.userService.login({
       username: this.user.username,
       password: this.user.password,
