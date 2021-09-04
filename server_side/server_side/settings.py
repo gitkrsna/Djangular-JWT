@@ -60,6 +60,8 @@ CORS_ORIGIN_ALLOW_ALL = False
 
 CORS_ORIGIN_WHITELIST = (
     'http://localhost:4200',
+    'https://djangular-jwt-62idm6rbn-gitkrsna.vercel.app',
+    'https://djangular-jwt-gitkrsna.vercel.app'
 )
 
 ROOT_URLCONF = 'server_side.urls'
