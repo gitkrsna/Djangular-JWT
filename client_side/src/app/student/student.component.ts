@@ -16,7 +16,7 @@ export class StudentComponent implements OnInit {
 
   ngOnInit() {
    this.studentService.list().subscribe(response => {
-    this.displayedColumns = ['First Name', 'Last Name', 'Enrollment Date'];
+    this.displayedColumns = ['First Name', 'Last Name', 'Father\'s Name', 'Mother\'s Name', 'Course', 'Enrollment Date'];
      this.studentList = response;
      console.log(response);
    })

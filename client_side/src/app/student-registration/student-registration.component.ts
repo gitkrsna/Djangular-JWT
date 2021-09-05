@@ -25,7 +25,8 @@ export class CreateStudentRegistration {
 
   openDialog(): void {
     const dialogRef = this.dialog.open(StudentRegistrationForm, {
-      width: '30rem',
+      width: '25rem',
+      height: '80%',
       data: {name: this.name, animal: this.animal}
     });
 
@@ -48,8 +49,13 @@ export class StudentRegistrationForm {
   student = {
     first_name: '',
     last_name: '',
+    father_name: '',
+    mother_name: '',
+    course_name: '',
     date_of_birth: '',
-    enrollment_date: ''
+    enrollment_date: '',
+    address: '',
+    
   }
   studentList : any = [];
   constructor(

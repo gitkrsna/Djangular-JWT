@@ -9,7 +9,21 @@
       <th mat-header-cell *matHeaderCellDef> Last Name </th>
       <td mat-cell *matCellDef="let element"> {{element.last_name}} </td>
     </ng-container>
-  
+    <ng-container matColumnDef="Father's Name">
+      <th mat-header-cell *matHeaderCellDef> Father's Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.father_name}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Mother's Name">
+      <th mat-header-cell *matHeaderCellDef> Mother's Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.mother_name}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Course">
+      <th mat-header-cell *matHeaderCellDef> Course Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.course_name}} </td>
+    </ng-container>
+
     <ng-container matColumnDef="Enrollment Date">
       <th mat-header-cell *matHeaderCellDef> Enrollment Date </th>
       <td mat-cell *matCellDef="let element"> {{element.enrollment_date | date : 'longDate'}} </td>
