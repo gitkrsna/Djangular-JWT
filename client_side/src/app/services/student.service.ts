@@ -4,7 +4,8 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 @Injectable()
 export class StudentService {
 
-  URL_PATH = `https://krishnapythonwhere.pythonanywhere.com`;
+  // URL_PATH = `https://krishnapythonwhere.pythonanywhere.com`;
+  URL_PATH = `http://127.0.0.1:8000`;
   constructor(private http: HttpClient) {
   }
 
@@ -18,5 +19,9 @@ export class StudentService {
 
   submitFees(feesData) {
     return this.http.post(`${this.URL_PATH}/api/academic/feessubmit`, feesData);
+  }
+
+  listFees() {
+    return this.http.get(`${this.URL_PATH}/api/academic/feeslist`);
   }
 }

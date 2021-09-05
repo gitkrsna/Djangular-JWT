@@ -10,15 +10,29 @@ import { DialogData } from '../student-registration/student-registration.compone
   styleUrls: ['./fees.component.scss']
 })
 export class FeesComponent implements OnInit {
+  feesList : any = [];
+  displayedColumns = [];
+  studentList: any;
+  constructor(public dialog: MatDialog,
+    private studentService: StudentService,
+    private changeDetectorRef: ChangeDetectorRef) {}
   ngOnInit(): void {
-  }
-
-  constructor(public dialog: MatDialog) {}
-
+    this.studentService.listFees().subscribe(response => {
+      this.displayedColumns = ['First Name', 'Last Name', 'Father\'s Name', 
+      'Mother\'s Name', 'Course', 'Enrollment Date',
+      'Fees Month', 'Amount'];
+       this.feesList = response;
+       console.log(response);
+     })
+    }
   openDialog(): void {
+    this.studentService.list().subscribe(response => {
+      this.studentList = response;
+    })
+
     const dialogRef = this.dialog.open(SubmitFeesForm, {
-      width: '25rem',
-      height: '80%',
+      width: '17rem',
+      height: '40%',
     });
 
     dialogRef.afterClosed().subscribe(result => {
