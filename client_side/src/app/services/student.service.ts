@@ -16,4 +16,7 @@ export class StudentService {
     return this.http.post(`${this.URL_PATH}/api/academic/students`, studentData);
   }
 
+  submitFees(feesData) {
+    return this.http.post(`${this.URL_PATH}/api/academic/feessubmit`, feesData);
+  }
 }

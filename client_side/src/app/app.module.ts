@@ -71,7 +71,7 @@ import { SignupLoginComponent } from './signup-login/signup-login.component';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 import { StudentService } from './services/student.service';
 import { StudentComponent } from './student/student.component';
-import { FeesComponent } from './fees/fees.component';
+import { FeesComponent, SubmitFeesForm } from './fees/fees.component';
 import { StudentRegistrationForm , CreateStudentRegistration} from './student-registration/student-registration.component';
 
 
@@ -85,6 +85,7 @@ import { StudentRegistrationForm , CreateStudentRegistration} from './student-re
     FeesComponent,
     StudentRegistrationForm,
     CreateStudentRegistration,
+    SubmitFeesForm,
   ],
   imports: [
     BrowserModule,

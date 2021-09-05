@@ -18,8 +18,6 @@ export interface DialogData {
 })
 export class CreateStudentRegistration {
 
-  animal: string;
-  name: string;
 
   constructor(public dialog: MatDialog) {}
 
@@ -27,12 +25,10 @@ export class CreateStudentRegistration {
     const dialogRef = this.dialog.open(StudentRegistrationForm, {
       width: '25rem',
       height: '80%',
-      data: {name: this.name, animal: this.animal}
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
-      this.animal = result;
     });
   }
 
