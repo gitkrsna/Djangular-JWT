@@ -7,11 +7,15 @@ import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 import { FeesComponent } from './fees/fees.component';
 import { LoginGaurdService as LoginGuard } from './services/gaurds/login-gaurd.service';
 import { StudentComponent } from './student/student.component';
+import { CreateStudentRegistration } from './student-registration/student-registration.component';
+import { AppComponent } from './app.component';
 const routes: Routes = [
-  { path: '', component: NavBarComponent, canActivate: [AuthGuard] },
+  //{ path: '', component: AppComponent, canActivate: [AuthGuard] },
+  //{ path: '', component: NavBarComponent, canActivate: [AuthGuard] },
   { path: 'students', component: StudentComponent, canActivate: [AuthGuard] },
   { path: 'fees', component: FeesComponent, canActivate: [AuthGuard] },
   { path: 'login', component: SignupLoginComponent, canActivate: [LoginGuard] },
+  { path: 'student-registration', component: CreateStudentRegistration, canActivate: [AuthGuard]},
 
   // { path: 'second-component', component: SecondComponent },
   // { path: '',   redirectTo: '/first-component', pathMatch: 'full' }, // redirect to `first-component`

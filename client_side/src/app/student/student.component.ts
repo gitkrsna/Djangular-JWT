@@ -6,13 +6,7 @@ import { StudentService } from '../services/student.service';
   styleUrls: ['./student.component.scss']
 })
 export class StudentComponent implements OnInit {
- 
-  student = {
-    first_name: '',
-    last_name: '',
-    date_of_birth: '',
-    enrollment_date: ''
-  }
+
 
   studentList : any = [];
   displayedColumns = [];
@@ -27,12 +21,5 @@ export class StudentComponent implements OnInit {
      console.log(response);
    })
   }
-   saveStudentDetails(){
-    this.studentService.createStudent(this.student).subscribe(response => {
-      this.studentList = response;
-      console.log(response);
-      this.changeDetectorRef.detectChanges();
-    })
-   }
 }
 

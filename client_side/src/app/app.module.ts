@@ -72,6 +72,7 @@ import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 import { StudentService } from './services/student.service';
 import { StudentComponent } from './student/student.component';
 import { FeesComponent } from './fees/fees.component';
+import { StudentRegistrationForm , CreateStudentRegistration} from './student-registration/student-registration.component';
 
 
 @NgModule({
@@ -82,6 +83,8 @@ import { FeesComponent } from './fees/fees.component';
     PagenotfoundComponent,
     StudentComponent,
     FeesComponent,
+    StudentRegistrationForm,
+    CreateStudentRegistration,
   ],
   imports: [
     BrowserModule,

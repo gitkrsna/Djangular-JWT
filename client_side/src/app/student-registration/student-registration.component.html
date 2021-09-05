@@ -1,0 +1,38 @@
+<ng-container>
+    <mat-list>
+      <mat-list-item>
+        <mat-form-field appearance="fill">
+          <mat-label>First Name</mat-label>
+          <input matInput [(ngModel)]="student.first_name" >
+       </mat-form-field>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item>
+        <mat-form-field appearance="fill">
+          <mat-label>Last Name</mat-label>
+          <input matInput [(ngModel)]="student.last_name" >
+       </mat-form-field>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item>
+        <mat-form-field appearance="fill">
+          <mat-label>Enrollment Date</mat-label>
+          <input matInput [matDatepicker]="enrollment_date_picker" [(ngModel)]="student.enrollment_date">
+          <mat-datepicker-toggle matSuffix [for]="enrollment_date_picker"></mat-datepicker-toggle>
+          <mat-datepicker #enrollment_date_picker></mat-datepicker>
+        </mat-form-field>
+      </mat-list-item>
+
+      <mat-list-item>
+        <mat-form-field appearance="fill">
+          <mat-label>Date of Birth</mat-label>
+          <input matInput [matDatepicker]="picker" [(ngModel)]="student.date_of_birth">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </mat-list-item>
+      <mat-list-item>
+        <button mat-raised-button color="accent" (click)="saveStudentDetails()">Submit</button>
+      </mat-list-item>
+    </mat-list>    
+  </ng-container>

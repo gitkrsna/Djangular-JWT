@@ -1,66 +1,21 @@
-<mat-grid-list cols="2" Ratio="2:1">
-  <mat-grid-tile>
-    <ng-container>
-      <mat-list>
-        <mat-list-item>
-          <mat-form-field appearance="fill">
-            <mat-label>First Name</mat-label>
-            <input matInput [(ngModel)]="student.first_name" >
-         </mat-form-field>
-        </mat-list-item>
-        <mat-divider></mat-divider>
-        <mat-list-item>
-          <mat-form-field appearance="fill">
-            <mat-label>Last Name</mat-label>
-            <input matInput [(ngModel)]="student.last_name" >
-         </mat-form-field>
-        </mat-list-item>
-        <mat-divider></mat-divider>
-        <mat-list-item>
-          <mat-form-field appearance="fill">
-            <mat-label>Enrollment Date</mat-label>
-            <input matInput [matDatepicker]="enrollment_date_picker" [(ngModel)]="student.enrollment_date">
-            <mat-datepicker-toggle matSuffix [for]="enrollment_date_picker"></mat-datepicker-toggle>
-            <mat-datepicker #enrollment_date_picker></mat-datepicker>
-          </mat-form-field>
-        </mat-list-item>
-
-        <mat-list-item>
-          <mat-form-field appearance="fill">
-            <mat-label>Date of Birth</mat-label>
-            <input matInput [matDatepicker]="picker" [(ngModel)]="student.date_of_birth">
-            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
-          </mat-form-field>
-        </mat-list-item>
-        <mat-list-item>
-          <button mat-raised-button color="accent" (click)="saveStudentDetails()">Submit</button>
-        </mat-list-item>
-      </mat-list>    
+<div class="student-list-table">
+  <table mat-table [dataSource]="studentList.results" class="mat-elevation-z8">
+    <ng-container matColumnDef="First Name">
+      <th mat-header-cell *matHeaderCellDef>First Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.first_name}} </td>
     </ng-container>
-  </mat-grid-tile>
-
-  <mat-grid-tile>
-    <table mat-table [dataSource]="studentList.results" class="mat-elevation-z8">
-      <ng-container matColumnDef="First Name">
-        <th mat-header-cell *matHeaderCellDef>First Name </th>
-        <td mat-cell *matCellDef="let element"> {{element.first_name}} </td>
-      </ng-container>
-    
-      <ng-container matColumnDef="Last Name">
-        <th mat-header-cell *matHeaderCellDef> Last Name </th>
-        <td mat-cell *matCellDef="let element"> {{element.last_name}} </td>
-      </ng-container>
-    
-      <ng-container matColumnDef="Enrollment Date">
-        <th mat-header-cell *matHeaderCellDef> Enrollment Date </th>
-        <td mat-cell *matCellDef="let element"> {{element.enrollment_date | date : 'longDate'}} </td>
-      </ng-container>
-    
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    </table>
-    
-  </mat-grid-tile>
-</mat-grid-list>
-
+  
+    <ng-container matColumnDef="Last Name">
+      <th mat-header-cell *matHeaderCellDef> Last Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.last_name}} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="Enrollment Date">
+      <th mat-header-cell *matHeaderCellDef> Enrollment Date </th>
+      <td mat-cell *matCellDef="let element"> {{element.enrollment_date | date : 'longDate'}} </td>
+    </ng-container>
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>
