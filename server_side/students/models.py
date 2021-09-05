@@ -26,7 +26,7 @@ class Students(models.Model):
     address = models.CharField(default='', max_length=200)
 
 class Fees(models.Model):
-    student = models.ForeignKey(Students, default=1, verbose_name="Students", on_delete=models.SET_DEFAULT, primary_key=True)
+    student = models.ForeignKey(Students, default=1, verbose_name="Students", on_delete=models.SET_DEFAULT)
     fees_month = models.CharField(
         max_length=10,
         choices=Months,
