@@ -3,7 +3,9 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 import { Router } from '@angular/router';
 import { StudentService } from '../services/student.service';
 import { DialogData } from '../student-registration/student-registration.component';
-
+import {FormControl} from '@angular/forms';
+import {Observable} from 'rxjs';
+import {map, startWith} from 'rxjs/operators';
 @Component({
   selector: 'app-fees',
   templateUrl: './fees.component.html',
@@ -31,8 +33,8 @@ export class FeesComponent implements OnInit {
     })
 
     const dialogRef = this.dialog.open(SubmitFeesForm, {
-      width: '17rem',
-      height: '40%',
+      width: '18rem',
+      height: '60%',
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -47,12 +49,37 @@ export class FeesComponent implements OnInit {
   templateUrl: './submit-fees.component.html',
   styleUrls: ['./fees.component.scss']
 })
-export class SubmitFeesForm {
+export class SubmitFeesForm implements OnInit {
+
+  myControl = new FormControl();
+  options: any;
+  Months = [
+    'Jan',
+    'Feb',
+    'Mar',
+    'Apr',  
+    'May', 
+    'Jun', 
+    'Jul', 
+    'Aug', 
+    'Sep', 
+    'Oct', 
+    'Nov', 
+    'Dec',
+];
+Amounts = [100, 150, 200, 250, 300, 350, 400, 450, 500];
+  ngOnInit() {
+
+    this.studentService.list().subscribe(x  => {
+     this.options = x;
+    })
+    
+  }
 
   fees = {
-    student: 0,
+    student: '',
     fees_month: '',
-    amount: 0
+    amount: ''
   }
   feesList : any = [];
   constructor(
