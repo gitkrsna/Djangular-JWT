@@ -15,6 +15,7 @@ export class FeesComponent implements OnInit {
   feesList : any = [];
   displayedColumns = [];
   studentList: any;
+  query: any;
   constructor(public dialog: MatDialog,
     private studentService: StudentService,
     private changeDetectorRef: ChangeDetectorRef) {}

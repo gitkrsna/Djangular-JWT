@@ -73,6 +73,7 @@ import { StudentService } from './services/student.service';
 import { StudentComponent } from './student/student.component';
 import { FeesComponent, SubmitFeesForm } from './fees/fees.component';
 import { StudentRegistrationForm , CreateStudentRegistration} from './student-registration/student-registration.component';
+import { SearchFilterPipe } from './pipes/search-filter.pipe';
 
 
 @NgModule({
@@ -86,6 +87,7 @@ import { StudentRegistrationForm , CreateStudentRegistration} from './student-re
     StudentRegistrationForm,
     CreateStudentRegistration,
     SubmitFeesForm,
+    SearchFilterPipe,
   ],
   imports: [
     BrowserModule,
