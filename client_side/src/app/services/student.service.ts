@@ -5,7 +5,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 export class StudentService {
 
   // URL_PATH = `https://krishnapythonwhere.pythonanywhere.com`;
-  URL_PATH = `http://127.0.0.1:8000`;
+  URL_PATH = `http://krishnapythonwhere.pythonanywhere.com`;
   constructor(private http: HttpClient) {
   }
 
