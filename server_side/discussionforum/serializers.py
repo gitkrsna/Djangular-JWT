@@ -4,7 +4,7 @@ from .models import Student, Course, Post, Comment, UserUpvote
 class StudentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Student
-        fields = ['first_name', 'last_name','username', 'email', 'mobile_number', 'course', 'date_of_birth', 'created_on', 'updated_on', 'password']
+        fields = ['first_name', 'last_name','username', 'email', 'mobile_number', 'course', 'date_of_birth', 'created_on', 'updated_on']
 
 class CourseSerializer(serializers.ModelSerializer):
     class Meta:
