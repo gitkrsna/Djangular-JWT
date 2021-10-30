@@ -16,7 +16,7 @@ Including another URLconf
 from django import urls
 from django.contrib import admin
 from django.urls import path, include
-
+from .utils import custom404, custom500
 # import rest_framework views for get_token & refresh_token 
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
@@ -32,3 +32,6 @@ urlpatterns = [
     path('api/gettoken/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/refreshtoken/', TokenRefreshView.as_view(), name='token_refresh'),
 ]
+
+handler404 = custom404
+handler500 = custom500

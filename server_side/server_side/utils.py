@@ -6,7 +6,7 @@ from django.core.exceptions import ValidationError as DjangoValidationError
 
 from rest_framework.exceptions import ValidationError as DRFValidationError
 from rest_framework.views import exception_handler as drf_exception_handler
-
+from django.http import JsonResponse
 
 def exception_handler(exc, context):
     if isinstance(exc, DjangoValidationError):
@@ -17,3 +17,17 @@ def exception_handler(exc, context):
         elif hasattr(exc, 'messages'):
             exc = DRFValidationError(detail={'error': exc.messages})
     return drf_exception_handler(exc, context)
+
+
+
+def custom404(request, exception=None):
+    return JsonResponse({
+        'status_code': 404,
+        'error': 'The resource was not found'
+    })    
+
+def custom500(request, exception=None):
+    return JsonResponse({
+        'status_code': 500,
+        'error': 'Something went wrong, Please try again later.'
+    })      
