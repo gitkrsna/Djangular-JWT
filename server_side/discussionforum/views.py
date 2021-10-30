@@ -1,6 +1,10 @@
-from .serializers import UserupvoteSerializer, CommentSerializer, PostSerializer, CourseSerializer, StudentSerializer
+from django.views.generic.base import RedirectView
+
+from .serializers import PostCreateSerializer, PostListSerializer, UserupvoteSerializer, CommentSerializer, PostSerializer, CourseSerializer, StudentSerializer
 from .models import Student, Course, Post, Comment, UserUpvote
-from students.ContextViewSet import ViewSet
+from students.ContextViewSet import ViewSet, CreateView, UpdateView, DeleteView, ListView, DetailView
+from rest_framework import mixins, reverse, status 
+from rest_framework.response import Response
 # Create your views here.
 class StudentViewSet(ViewSet):
     queryset = Student.objects.all()
@@ -21,3 +25,21 @@ class CommentViewSet(ViewSet):
 class UserUpvoteViewSet(ViewSet):
     queryset = UserUpvote.objects.all()
     serializer_class = UserupvoteSerializer         
+
+
+class PostListView(ListView):
+    queryset = Post.objects.all()
+    serializer_class = PostListSerializer
+
+
+class PostCreateView(CreateView):
+    queryset = Post.objects.all()
+    serializer_class = PostCreateSerializer
+
+class PostUpdateOrDeleteView(UpdateView, DeleteView):
+    queryset = Post.objects.all()
+    serializer_class = PostCreateSerializer
+
+class PostDetailView(DetailView):
+    queryset = Post.objects.all()
+    serializer_class = PostCreateSerializer
