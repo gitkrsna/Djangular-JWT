@@ -28,8 +28,13 @@ class UserUpvoteViewSet(ViewSet):
 
 
 class PostListView(ListView):
-    queryset = Post.objects.all()
     serializer_class = PostListSerializer
+    def get_queryset(self): # get_queryset is used to customize the queryset
+        print("request user id is", self.request.user.id)
+        print("request username is", self.request.user.username)
+        print("request user password is", self.request.user.password)
+        return Post.objects.filter() 
+
 
 
 class PostCreateView(CreateView):
