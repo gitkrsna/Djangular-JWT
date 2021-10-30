@@ -155,6 +155,9 @@ REST_FRAMEWORK = {
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
 
+    #for customizing the exception message
+    'EXCEPTION_HANDLER': 'server_side.utils.exception_handler',
+
     # pagination class and page-size per request
 
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
