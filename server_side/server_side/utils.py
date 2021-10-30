@@ -1,3 +1,4 @@
+from rest_framework import status
 from rest_framework.status import HTTP_400_BAD_REQUEST
 from rest_framework.views import exception_handler
 
@@ -21,13 +22,15 @@ def exception_handler(exc, context):
 
 
 def custom404(request, exception=None):
-    return JsonResponse({
-        'status_code': 404,
-        'error': 'The resource was not found'
-    })    
+    data = {
+        'error': 'The resource was not found (404)',
+        'status': status.HTTP_404_NOT_FOUND
+    }
+    return JsonResponse(data, status = status.HTTP_404_NOT_FOUND)    
 
 def custom500(request, exception=None):
-    return JsonResponse({
-        'status_code': 500,
-        'error': 'Something went wrong, Please try again later.'
-    })      
+    data = {
+        'error': 'Something went wrong. Please try again later (500)',
+        'status': status.HTTP_500_INTERNAL_SERVER_ERROR
+    }
+    return JsonResponse(data, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
