@@ -3,7 +3,7 @@ from .models import Student, Post, Comment, Course, UserUpvote
 # Register your models here.
 @admin.register(Student)
 class StudentAdmin(admin.ModelAdmin):
-    list_display = ['first_name', 'last_name','username', 'email', 'mobile_number', 'course', 'date_of_birth', 'created_on', 'updated_on', 'password']
+    list_display = ('user', 'course', 'mobile_number', 'date_of_birth', 'created_on', 'updated_on')
 
 @admin.register(Course)
 class CourseAdmin(admin.ModelAdmin):
@@ -11,7 +11,7 @@ class CourseAdmin(admin.ModelAdmin):
 
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
-    list_display = ['author', 'title', 'content', 'post_image', 'created_on', 'updated_on']
+    list_display = ['id', 'author', 'title', 'content', 'post_image', 'created_on', 'updated_on']
 
 @admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):

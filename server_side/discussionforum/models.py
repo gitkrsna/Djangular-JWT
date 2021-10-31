@@ -11,22 +11,27 @@ class Course(models.Model):
     duration = models.CharField(max_length=20, default='')
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
+    def __str__(self):
+        return self.course_name
 
-class Student(User):
-    course = models.ForeignKey(Course, verbose_name= "Course_name", on_delete=models.CASCADE)
-    date_of_birth = models.DateField()
-    mobile_number = models.CharField(max_length=15)
+class Student(models.Model):
+    user = models.OneToOneField(User, primary_key=True, on_delete=models.CASCADE)
+    course = models.ForeignKey(Course, verbose_name= "Course_name", on_delete=models.CASCADE, blank=True, null=True, default='')
+    date_of_birth = models.DateField(default='', blank=True, null=True)
+    mobile_number = models.CharField(max_length=15, default='', blank=True, null=True)
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
-
+    def __str__(self):
+        return str(self.user_id) + " " + "(" + str(self.user.username) + ")" 
 
 class Post(models.Model):
-    author = models.ForeignKey(Student, on_delete=models.CASCADE)
+    author = models.ForeignKey(Student, on_delete=models.CASCADE, default='', verbose_name= "Author")
     title = models.CharField(max_length=50)
     content = models.TextField()
     post_image = models.FileField(blank = True, null=True)
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
+    
 
 
 class Comment(models.Model):
