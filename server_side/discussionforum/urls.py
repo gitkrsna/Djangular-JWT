@@ -4,6 +4,8 @@ from rest_framework import routers
 from . import views
 
 router = routers.DefaultRouter(trailing_slash=False)
+router.register(r'student/create', views.StudentCreateView, basename='student/create')
+router.register(r'student/update', views.StudentUpdateView, basename='student/update')
 router.register(r'student', views.StudentViewSet, basename='student')
 router.register(r'course', views.CourseViewSet, basename='course')
 router.register(r'userupvote', views.UserUpvoteViewSet, basename='userupvote')

@@ -4,7 +4,7 @@ from django.http.request import QueryDict
 from django.views.generic.base import RedirectView
 from django.http import JsonResponse
 
-from .serializers import PostCreateSerializer, PostListSerializer, UserupvoteSerializer, CommentSerializer, PostSerializer, CourseSerializer, StudentSerializer
+from .serializers import PostCreateSerializer, PostListSerializer, StudentCreateSerializer, StudentUpdateSerializer, UserupvoteSerializer, CommentSerializer, PostSerializer, CourseSerializer, StudentSerializer
 from .models import Student, Course, Post, Comment, UserUpvote
 from students.ContextViewSet import ViewSet, CreateView, UpdateView, DeleteView, ListView, DetailView
 from rest_framework import mixins, reverse, status, viewsets 
@@ -15,7 +15,39 @@ from rest_framework import status
 class StudentViewSet(ViewSet):
     queryset = Student.objects.all()
     serializer_class = StudentSerializer
-    
+
+class StudentCreateView(CreateView):
+    def create(self, request, *args, **kwargs):
+        if not request.data:
+            raise NotAcceptable(detail="No data provided")
+        if 'user' not in request.data:
+            raise NotAcceptable(detail="No User data provided") 
+        if 'email' not in request.data['user']:
+            raise NotAcceptable(detail="No email provided")       
+  
+        if 'password1' not in request.data['user']:
+            raise NotAcceptable(detail="No password1 provided") 
+        if 'password2' not in request.data['user']:
+            raise NotAcceptable(detail="No password2 provided")      
+        #check both passwords are same
+        password1 =  request.data['user']['password1']
+        password2 = request.data['user']['password2']
+        if password1 != password2:
+            raise ValidationError({'detail': 'Passwords do not match'})
+        else:
+            request.data['user']['password'] = password1
+            request.data['user']['username'] = request.data['user']['email']
+            # request.data['user']['is_staff'] = True
+            # request.data['user']['is_superuser'] = True
+            # request.data['user']['is_active'] = True
+            del request.data['user']['password1']
+            del request.data['user']['password2']
+        # call parent create method after modifying request data
+        return super().create(request, *args, **kwargs)
+    queryset = Student.objects.all()
+    serializer_class = StudentCreateSerializer
+
+
 class CourseViewSet(ViewSet):
     queryset = Course.objects.all()
     serializer_class = CourseSerializer   

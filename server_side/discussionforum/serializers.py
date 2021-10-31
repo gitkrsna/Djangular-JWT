@@ -1,10 +1,33 @@
 from rest_framework import serializers
 from .models import Student, Course, Post, Comment, UserUpvote
+from django.contrib.auth.models import User
 
-class StudentSerializer(serializers.ModelSerializer):
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('email', 'username' , 'password', 'is_active', 'is_superuser', 'is_staff')
+class StudentCreateSerializer(serializers.ModelSerializer):
+    user = UserSerializer()
     class Meta:
         model = Student
-        fields = ['id','first_name', 'last_name','username', 'email', 'mobile_number', 'course', 'date_of_birth', 'created_on', 'updated_on']
+        fields = [ 'user', 'mobile_number', 'course', 'date_of_birth', 'created_on', 'updated_on']
+    def create(self, validated_data):
+        user = validated_data.pop('user') 
+        user_instance = User.objects.create(**user) 
+        return Student.objects.create(user=user_instance , **validated_data)
+
+class StudentUpdateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Student
+        fields = [ 'user', 'mobile_number', 'course', 'date_of_birth', 'created_on', 'updated_on']
+
+
+class StudentSerializer(serializers.ModelSerializer):
+    user = UserSerializer()
+    class Meta:
+        model = Student
+        fields = [ 'user', 'mobile_number', 'course', 'date_of_birth', 'created_on', 'updated_on']
 
 class CourseSerializer(serializers.ModelSerializer): 
     class Meta:
