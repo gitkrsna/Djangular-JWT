@@ -47,6 +47,15 @@ class StudentCreateView(CreateView):
     queryset = Student.objects.all()
     serializer_class = StudentCreateSerializer
 
+class StudentUpdateView(UpdateView):
+    def update(self, request, *args, **kwargs):
+        if int(kwargs.get('pk')) != self.request.user.id:
+            raise NotAcceptable(detail="You are not authorized for this action")
+        kwargs['partial'] = True
+        return super().update(request, *args, **kwargs)
+    def get_queryset(self):
+        return Student.objects.filter(user__id=self.request.user.id)
+    serializer_class = StudentUpdateSerializer
 
 class CourseViewSet(ViewSet):
     queryset = Course.objects.all()
@@ -73,7 +82,7 @@ class PostListView(ListView):
         # print("request user id is", self.request.user.id)
         # print("request username is", self.request.user.username)
         # print("request user password is", self.request.user.password)
-        return Post.objects.all() 
+        return Post.objects.filter(author_id=self.request.user.id)
 
 
 
@@ -85,7 +94,6 @@ class PostCreateView(CreateView):
         request.data['author'] = self.request.user.id
         # check if request user is an student
         user_exist = Student.objects.filter(user=self.request.user).exists()
-        print("user count is", user_exist)
         if not user_exist:
             raise PermissionDenied("You are not a student/author")
         post_title_exist = Post.objects.filter(title=request.data['title']).exists()
@@ -94,11 +102,13 @@ class PostCreateView(CreateView):
             
         # call parent create method after modifying request data
         return super().create(request, *args, **kwargs)
-    queryset = Post.objects.all()
+    def get_queryset(self):
+        return Post.objects.filter(author_id=self.request.user.id)
     serializer_class = PostCreateSerializer
 
 class PostUpdateDeleteView(UpdateView, DeleteView):
     def update(self, request, *args, **kwargs):
+        kwargs['partial'] = True
         # check if request user is an student
         user_exist = Student.objects.filter(user=self.request.user).exists()
         if not user_exist:
@@ -115,15 +125,16 @@ class PostUpdateDeleteView(UpdateView, DeleteView):
 
     def destroy(self, request, *args, **kwargs):
         # check if request user is an student
-        user_exist = Student.objects.filter(user=self.request.user).exists()
-        if not user_exist:
-            raise PermissionDenied("You are not a student/author")
-        object_exist = Post.objects.filter(id=self.kwargs['pk']).exists()
-        if not object_exist:
-            raise NotFound(detail="Error 404, Id Not Found", code=404)   
+        # user_exist = Student.objects.filter(user=self.request.user).exists()
+        # if not user_exist:
+        #     raise PermissionDenied("You are not a student/author")
+        # object_exist = Post.objects.filter(id=self.kwargs['pk']).exists()
+        # if not object_exist:
+        #     raise NotFound(detail="Error 404, Id Not Found", code=404)   
         return super().destroy(request, *args, **kwargs)
     
-    queryset = Post.objects.all()
+    def get_queryset(self):
+        return Post.objects.filter(author_id=self.request.user.id)
     serializer_class = PostCreateSerializer
 
 class PostDetailView(DetailView):

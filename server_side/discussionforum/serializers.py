@@ -72,7 +72,7 @@ class UserupvoteSerializer(serializers.ModelSerializer):
 class AuthorInfoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Student
-        fields = ['first_name', 'last_name', 'username', 'email', 'mobile_number', 'date_of_birth']
+        fields = [ 'mobile_number', 'date_of_birth']
 
 class PostListSerializer(serializers.ModelSerializer):
     author = AuthorInfoSerializer()
