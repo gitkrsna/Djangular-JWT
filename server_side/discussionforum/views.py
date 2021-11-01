@@ -37,6 +37,7 @@ class StudentCreateView(CreateView):
         else:
             request.data['user']['password'] = password1
             request.data['user']['username'] = request.data['user']['email']
+            request.data['date_of_birth'] = None
             # request.data['user']['is_staff'] = True
             # request.data['user']['is_superuser'] = True
             # request.data['user']['is_active'] = True

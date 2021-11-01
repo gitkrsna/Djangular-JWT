@@ -14,7 +14,8 @@ class StudentCreateSerializer(serializers.ModelSerializer):
         fields = [ 'user', 'mobile_number', 'course', 'date_of_birth', 'created_on', 'updated_on']
     def create(self, validated_data):
         user = validated_data.pop('user') 
-        user_instance = User.objects.create(**user) 
+        # use create_user method of User model to create a new user
+        user_instance = User.objects.create_user(**user)  # **user is used to unpack the dictionary 
         return Student.objects.create(user=user_instance , **validated_data)
 
 class StudentUpdateSerializer(serializers.ModelSerializer):
@@ -78,8 +79,10 @@ class PostListSerializer(serializers.ModelSerializer):
     author = AuthorInfoSerializer()
     class Meta:
         model = Post
+        # fields you want to send/display to the client
         fields = ['author', 'title', 'content', 'post_image']
 class PostCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Post
+        # fields you want to save in the database
         fields = ['author', 'title', 'content', 'post_image']       

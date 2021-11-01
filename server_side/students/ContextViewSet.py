@@ -53,9 +53,7 @@ class CreateView(mixins.CreateModelMixin, viewsets.GenericViewSet):
 class UpdateView(mixins.UpdateModelMixin, viewsets.GenericViewSet):
     def update(self, request, *args, **kwargs):
         partial = kwargs.pop('partial', False)
-        print("ddddddddddddddddddddddddddddddddddddd")
         instance = self.get_object()
-        print("instance is", instance)
         serializer = self.get_serializer(instance, data=request.data, partial=partial)
         serializer.is_valid(raise_exception=True)
         self.perform_update(serializer)
