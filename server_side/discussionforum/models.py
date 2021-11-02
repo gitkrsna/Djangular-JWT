@@ -48,5 +48,5 @@ class Comment(models.Model):
         return str(self.comment_author) + " " + "(" + str(self.comment_content) + ")" 
 
 class UserUpvote(models.Model):
-    user = models.ForeignKey(Student, on_delete=models.CASCADE)
-    comment = models.ForeignKey(Comment, on_delete=models.CASCADE)
+    user = models.ForeignKey(Student, on_delete=models.CASCADE, related_name='student')
+    comment = models.ForeignKey(Comment, on_delete=models.CASCADE, related_name='userupvote')

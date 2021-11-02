@@ -57,10 +57,15 @@ class PostSerializerWithNestedField(serializers.ModelSerializer):
         # **validated_data is used to create a new instance of the post model with the validated data
         # validated_data is a dictionary of the validated data  
 
+class UpvoteSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UserUpvote
+        fields = ['user']
 class CommentSerializer(serializers.ModelSerializer):
+    userupvote = UpvoteSerializer(many=True)
     class Meta:
         model = Comment
-        fields = ['comment_content', 'upvotes', 'created_on', 'updated_on']
+        fields = ['comment_content', 'userupvote', 'upvotes', 'created_on', 'updated_on']
 
 class PostWithCommentSerializer(serializers.ModelSerializer):
     comment = CommentSerializer(many=True)
