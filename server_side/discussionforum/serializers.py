@@ -102,3 +102,23 @@ class UpvoteSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserUpvote
         fields = ['user', 'comment', 'is_upvote']
+
+    def create(self, validated_data):
+        comment_id = validated_data.pop('comment')
+        comment_instance = Comment.objects.get(id=comment_id)
+        if validated_data.get('is_upvote') == True:
+            comment_instance.upvotes += 1
+            comment_instance.save()
+        return UserUpvote.objects.create(comment=comment_instance, **validated_data)
+
+    def update(self, instance, validated_data):
+        if validated_data.get('is_upvote') == False and instance.is_upvote == True: 
+            instance.comment.upvotes -= 1
+            instance.comment.save()
+        elif validated_data.get('is_upvote') == True and instance.is_upvote == False:
+            instance.comment.upvotes += 1
+            instance.comment.save() 
+        instance.is_upvote = validated_data.get('is_upvote')
+        instance.save()
+        return instance    
+        
