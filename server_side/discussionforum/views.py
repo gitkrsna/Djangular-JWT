@@ -1,13 +1,14 @@
 import re
 from django.contrib.auth.models import User
+from django.db.models import query
 from django.http.request import QueryDict
 from django.views.generic.base import RedirectView
 from django.http import JsonResponse
 
-from .serializers import PostCreateSerializer, PostListSerializer, PostWithCommentSerializer, StudentCreateSerializer, StudentUpdateSerializer, UserupvoteSerializer, CommentSerializer, PostSerializer, CourseSerializer, StudentSerializer
+from .serializers import PostCreateSerializer, PostListSerializer, PostWithCommentSerializer, StudentCreateSerializer, StudentUpdateSerializer, UpvoteSerializer, UserupvoteSerializer, CommentSerializer, PostSerializer, CourseSerializer, StudentSerializer
 from .models import Student, Course, Post, Comment, UserUpvote
 from students.ContextViewSet import ViewSet, CreateView, UpdateView, DeleteView, ListView, DetailView
-from rest_framework import mixins, reverse, status, viewsets 
+from rest_framework import mixins, reverse, serializers, status, viewsets 
 from rest_framework.response import Response
 from rest_framework.exceptions import APIException, NotAcceptable, NotFound, PermissionDenied, ValidationError
 from rest_framework import status
@@ -143,3 +144,9 @@ class PostDetailView(DetailView):
     def get_queryset(self):
         return Post.objects.filter(id=self.kwargs['pk'])
     serializer_class = PostCreateSerializer
+
+class UpvoteView(ViewSet):
+    def get_queryset(self):
+        return UserUpvote.objects.filter(user_id=self.request.user.id)
+    serializer_class = UpvoteSerializer
+    

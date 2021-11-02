@@ -97,3 +97,8 @@ class PostCreateSerializer(serializers.ModelSerializer):
         model = Post
         # fields you want to save in the database
         fields = ['author', 'title', 'content', 'post_image']       
+
+class UpvoteSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UserUpvote
+        fields = ['user', 'comment', 'is_upvote']

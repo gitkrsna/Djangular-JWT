@@ -50,3 +50,4 @@ class Comment(models.Model):
 class UserUpvote(models.Model):
     user = models.ForeignKey(Student, on_delete=models.CASCADE, related_name='student')
     comment = models.ForeignKey(Comment, on_delete=models.CASCADE, related_name='userupvote')
+    is_upvote = models.BooleanField(default=False)

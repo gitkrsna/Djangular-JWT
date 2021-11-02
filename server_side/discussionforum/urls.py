@@ -18,6 +18,8 @@ router.register(r'post/update', views.PostUpdateDeleteView, basename='post/updat
 router.register(r'post/delete', views.PostUpdateDeleteView, basename='post/delete')
 router.register(r'post/detail', views.PostDetailView, basename='post/detail')
 router.register(r'post/list', views.PostListView, basename='post/list')
+router.register(r'comment/upvote', views.UpvoteView, basename='comment/upvote')
+
 
 urlpatterns = [
     path(r'', include(router.urls)),

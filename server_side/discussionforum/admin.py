@@ -19,4 +19,4 @@ class CommentAdmin(admin.ModelAdmin):
 
 @admin.register(UserUpvote)
 class UpvoteAdmin(admin.ModelAdmin):
-    list_display = ['user', 'comment']
+    list_display = ['id', 'user', 'comment', 'is_upvote']
