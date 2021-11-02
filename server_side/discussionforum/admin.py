@@ -15,7 +15,7 @@ class PostAdmin(admin.ModelAdmin):
 
 @admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):
-    list_display = ['post', 'comment_author', 'comment_content', 'comment_image', 'upvotes', 'created_on', 'updated_on']
+    list_display = ['id', 'post', 'comment_author', 'comment_content', 'comment_image', 'upvotes', 'created_on', 'updated_on']
 
 @admin.register(UserUpvote)
 class UpvoteAdmin(admin.ModelAdmin):

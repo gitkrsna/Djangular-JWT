@@ -4,7 +4,7 @@ from django.http.request import QueryDict
 from django.views.generic.base import RedirectView
 from django.http import JsonResponse
 
-from .serializers import PostCreateSerializer, PostListSerializer, StudentCreateSerializer, StudentUpdateSerializer, UserupvoteSerializer, CommentSerializer, PostSerializer, CourseSerializer, StudentSerializer
+from .serializers import PostCreateSerializer, PostListSerializer, PostWithCommentSerializer, StudentCreateSerializer, StudentUpdateSerializer, UserupvoteSerializer, CommentSerializer, PostSerializer, CourseSerializer, StudentSerializer
 from .models import Student, Course, Post, Comment, UserUpvote
 from students.ContextViewSet import ViewSet, CreateView, UpdateView, DeleteView, ListView, DetailView
 from rest_framework import mixins, reverse, status, viewsets 
@@ -66,9 +66,10 @@ class PostViewSet(ViewSet):
     queryset = Post.objects.all()
     serializer_class = PostSerializer 
 
-class CommentViewSet(ViewSet):
-    queryset = Comment.objects.all()
-    serializer_class = CommentSerializer     
+class PostWithCommentViewSet(ViewSet):     
+    def get_queryset(self):
+        return Post.objects.filter(id=self.kwargs['pk']).select_related('author').prefetch_related('comment')
+    serializer_class = PostWithCommentSerializer
 
 class UserUpvoteViewSet(ViewSet):
     queryset = UserUpvote.objects.all()
@@ -78,12 +79,12 @@ class UserUpvoteViewSet(ViewSet):
 
 
 class PostListView(ListView):
-    serializer_class = PostListSerializer
+    serializer_class = PostWithCommentSerializer
     def get_queryset(self): # get_queryset is used to customize the queryset
         # print("request user id is", self.request.user.id)
         # print("request username is", self.request.user.username)
         # print("request user password is", self.request.user.password)
-        return Post.objects.filter(author_id=self.request.user.id)
+        return Post.objects.all().select_related('author').prefetch_related('comment')
 
 
 

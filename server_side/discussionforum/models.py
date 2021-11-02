@@ -35,13 +35,17 @@ class Post(models.Model):
 
 
 class Comment(models.Model):
-    post= models.ForeignKey(Post, on_delete=models.CASCADE)
+    post= models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comment')
     comment_author = models.ForeignKey(Student, on_delete=models.CASCADE)
     comment_content = models.TextField()
     comment_image = models.FileField(blank=True, null=True)
     upvotes = models.IntegerField(default=0)
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
+    class Meta:
+        ordering = ['-id']    
+    def __str__(self):
+        return str(self.comment_author) + " " + "(" + str(self.comment_content) + ")" 
 
 class UserUpvote(models.Model):
     user = models.ForeignKey(Student, on_delete=models.CASCADE)
