@@ -4,7 +4,8 @@ from django.db.models import query
 from django.http.request import QueryDict
 from django.views.generic.base import RedirectView
 from django.http import JsonResponse
-
+from django.core.exceptions import ValidationError
+from django.core.validators import validate_email
 from .serializers import PostCreateSerializer, PostListSerializer, PostWithCommentSerializer, StudentCreateSerializer, StudentUpdateSerializer, UpvoteSerializer, UserupvoteSerializer, CommentSerializer, PostSerializer, CourseSerializer, StudentSerializer
 from .models import Student, Course, Post, Comment, UserUpvote
 from students.ContextViewSet import ViewSet, CreateView, UpdateView, DeleteView, ListView, DetailView
@@ -17,6 +18,32 @@ class StudentViewSet(ViewSet):
     queryset = Student.objects.all()
     serializer_class = StudentSerializer
 
+
+class StudentRegisterView(CreateView):  
+    def create(self, request, *args, **kwargs):
+        print("cdnncjndfkjffffffffffff", request.data)
+        if 'firstname' not in request.data or 'lastname' not in request.data or 'username' not in request.data or 'password' not in request.data:
+            raise ValidationError("Missing fields")
+        try:
+            validate_email(request.data['username'])
+        except ValidationError as e:
+            raise ValidationError("Invalid email")
+        request.data['user'] = {}
+        request.data['user']['username'] = request.data['username']
+        request.data['user']['email'] = request.data['username']
+        request.data['user']['password'] = request.data['password']
+        request.data['first_name'] = request.data['firstname']
+        request.data['last_name'] = request.data['lastname']
+        request.data['date_of_birth'] = None
+        delete_keys = ['username', 'password', 'firstname', 'lastname']
+        for key in delete_keys:
+            request.data.pop(key)
+        print("request.data", request.data)
+        return super().create(request, *args, **kwargs)
+    serializer_class = StudentCreateSerializer
+    permission_classes = ()
+    authentication_classes = ()
+    queryset = Student.objects.all()
 class StudentCreateView(CreateView):
     def create(self, request, *args, **kwargs):
         if not request.data:
@@ -48,7 +75,8 @@ class StudentCreateView(CreateView):
         return super().create(request, *args, **kwargs)
     queryset = Student.objects.all()
     serializer_class = StudentCreateSerializer
-
+    authentication_classes = ()
+    permission_classes = ()
 class StudentUpdateView(UpdateView):
     def update(self, request, *args, **kwargs):
         if int(kwargs.get('pk')) != self.request.user.id:

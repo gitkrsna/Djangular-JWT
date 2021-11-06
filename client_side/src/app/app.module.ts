@@ -75,6 +75,8 @@ import { FeesComponent, SubmitFeesForm } from './fees/fees.component';
 import { StudentRegistrationForm , CreateStudentRegistration} from './student-registration/student-registration.component';
 import { SearchFilterPipe } from './pipes/search-filter.pipe';
 import { BlogPostComponent } from './blog-post/blog-post.component';
+import { RegisterComponent } from './components/register/register.component';
+import { LogInComponent } from './components/log-in/log-in.component';
 
 
 @NgModule({
@@ -90,6 +92,8 @@ import { BlogPostComponent } from './blog-post/blog-post.component';
     SubmitFeesForm,
     SearchFilterPipe,
     BlogPostComponent,
+    RegisterComponent,
+    LogInComponent,
   ],
   imports: [
     BrowserModule,

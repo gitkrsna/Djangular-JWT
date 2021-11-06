@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('email', 'username' , 'password', 'is_active', 'is_superuser', 'is_staff')
+        fields = ('email', 'username', 'first_name', 'last_name', 'password', 'is_active', 'is_superuser', 'is_staff')
 class StudentCreateSerializer(serializers.ModelSerializer):
     user = UserSerializer()
     class Meta:

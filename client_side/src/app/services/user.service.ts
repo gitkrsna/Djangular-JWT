@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable()
 export class UserService {
@@ -20,14 +21,34 @@ export class UserService {
   // error messages received from the login attempt
   public errors: any = [];
   refreshTokenVal: any;
-  URL_PATH = `https://krishnapythonwhere.pythonanywhere.com`;
+  URL_PATH = `http://localhost:8000/api/discussionforum`;
   constructor(private http: HttpClient,
+     private _snackBar: MatSnackBar,
     private router: Router) {}
+
+    public register(user) {
+      this.http
+        .post(`${this.URL_PATH}/student/signup`, JSON.stringify(user))
+        .subscribe(
+          (data) => {
+            this._snackBar.open('Register Successfully', 'Success', {
+              duration: 5000,
+            });
+            this.router.navigate(['/signin']);
+          },
+          (err) => {
+            this._snackBar.open(err.error.error, 'Error', {
+              duration: 5000,
+            });
+            this.errors = err['error'];
+          }
+        );
+    }
 
   // Uses http.post() to get an auth token from djangorestframework-jwt endpoint
   public login(user) {
     this.http
-      .post(`${this.URL_PATH}/api/gettoken/`, JSON.stringify(user))
+      .post(`${this.URL_PATH}/student/login/`, JSON.stringify(user))
       .subscribe(
         (data) => {
           if(data['access']) {
@@ -38,7 +59,9 @@ export class UserService {
           }
         },
         (err) => {
-          console.error('login error', err);
+          this._snackBar.open(err.error.detail, 'Error', {
+            duration: 5000,
+          });
           this.errors = err['error'];
         }
       );

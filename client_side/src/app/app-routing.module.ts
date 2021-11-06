@@ -10,6 +10,8 @@ import { StudentComponent } from './student/student.component';
 import { CreateStudentRegistration } from './student-registration/student-registration.component';
 import { AppComponent } from './app.component';
 import { BlogPostComponent } from './blog-post/blog-post.component';
+import { RegisterComponent } from './components/register/register.component';
+import { LogInComponent } from './components/log-in/log-in.component';
 
 const routes: Routes = [
   //{ path: '', component: AppComponent, canActivate: [AuthGuard] },
@@ -19,6 +21,9 @@ const routes: Routes = [
   { path: 'login', component: SignupLoginComponent, canActivate: [LoginGuard] },
   { path: 'student-registration', component: CreateStudentRegistration, canActivate: [AuthGuard]},
   { path: 'blog', component: BlogPostComponent, canActivate: [AuthGuard]},
+  { path: 'register', component: RegisterComponent},
+  { path: 'signin', component: LogInComponent},
+
 
   // { path: 'second-component', component: SecondComponent },
   // { path: '',   redirectTo: '/first-component', pathMatch: 'full' }, // redirect to `first-component`
